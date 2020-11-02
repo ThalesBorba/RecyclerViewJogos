@@ -1,4 +1,4 @@
-package com.example.recyclerview.uiActivity;
+package com.example.recyclerview.utilitarios;
 
 import android.os.Bundle;
 import android.widget.Toast;
@@ -7,8 +7,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.recyclerview.R;
 import com.example.recyclerview.modelos.Jogo;
-import com.example.recyclerview.utilitarios.JogoResponse;
-import com.example.recyclerview.utilitarios.RetrofitCall;
 
 import java.util.ArrayList;
 
@@ -18,7 +16,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainActivity extends AppCompatActivity {
+public class GetResponseActivity extends AppCompatActivity {
 
 
     @Override
@@ -42,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 JogoResponse jogoResponse = response.body();
+                ArrayList<Jogo> jogos = jogoResponse.getJogos();
+
+
             }
 
             @Override
