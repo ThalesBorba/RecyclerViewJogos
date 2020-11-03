@@ -41,16 +41,17 @@ public class JogoAdapter extends RecyclerView.Adapter<JogoAdapter.JogoViewHolder
 
             String logoMandantePath = jogoAtual.getMandante().getUrlDaImagem();
             String logoVisitantePath = jogoAtual.getVisitante().getUrlDaImagem();
+            int golsMandantePath;
+            int golsVisitantePath;
             String dataHoraPath = jogoAtual.getData() + " " + jogoAtual.getLocal() + " " +
                     jogoAtual.getHora();
-            String placarPath;
-            if (jogoAtual.getPlacar() == null) {
-                placarPath = " X ";
-            } else {
-                placarPath = jogoAtual.getPlacar().getConcatenado();
+            if (jogoAtual.getPlacar() != null) {
+                golsMandantePath = jogoAtual.getPlacar().getGolsDoMandante();
+                golsVisitantePath = jogoAtual.getPlacar().getGetGolsDoVisitante();
+                holder.golsMandante.setText(String.valueOf(golsMandantePath));
+                holder.golsVisitante.setText(String.valueOf(golsVisitantePath));
             }
             holder.dataHora.setText(dataHoraPath.toUpperCase());
-            holder.placar.setText(placarPath);
             Picasso.get().load(logoMandantePath).fit().centerInside().into(holder.logoMandante);
             Picasso.get().load(logoVisitantePath).fit().centerInside().into(holder.logoVisitante);
         }
@@ -65,14 +66,16 @@ public class JogoAdapter extends RecyclerView.Adapter<JogoAdapter.JogoViewHolder
             public ImageView logoMandante;
             public ImageView logoVisitante;
             public TextView dataHora;
-            public TextView placar;
+            public TextView golsMandante;
+            public TextView golsVisitante;
             public JogoViewHolder(@NonNull View itemView) {
                 super(itemView);
 
                 logoMandante = itemView.findViewById(R.id.logoMandante);
                 logoVisitante = itemView.findViewById(R.id.logoVisitante);
                 dataHora = itemView.findViewById(R.id.dataHora);
-                placar = itemView.findViewById(R.id.placar);
+                golsMandante = itemView.findViewById(R.id.golsMandante);
+                golsVisitante = itemView.findViewById(R.id.golsVisitante);
             }
         }
     }
