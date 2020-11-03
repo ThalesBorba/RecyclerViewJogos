@@ -19,4 +19,9 @@ public class Time {
     public String getUrlDaImagem() {
         return urlDaImagem;
     }
+
+    @Override
+    public String toString() {
+        return (String) urlDaImagem;
+    }
 }

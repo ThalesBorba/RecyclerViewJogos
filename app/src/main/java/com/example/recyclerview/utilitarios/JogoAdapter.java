@@ -38,7 +38,6 @@ public class JogoAdapter extends RecyclerView.Adapter<JogoAdapter.JogoViewHolder
         @Override
         public void onBindViewHolder(@NonNull JogoViewHolder holder, int position) {
             Jogo jogoAtual = jogoArrayList.get(position);
-
             String logoMandantePath = jogoAtual.getMandante().getUrlDaImagem();
             String logoVisitantePath = jogoAtual.getVisitante().getUrlDaImagem();
             int golsMandantePath;

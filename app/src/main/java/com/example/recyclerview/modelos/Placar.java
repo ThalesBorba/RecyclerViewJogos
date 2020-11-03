@@ -16,7 +16,5 @@ public class Placar {
         return getGolsDoVisitante;
     }
 
-    public String getConcatenado() { return golsDoMandante + " X " + getGolsDoVisitante; }
-
     }
 
