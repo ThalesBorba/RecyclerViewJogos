@@ -49,7 +49,7 @@ public class JogoAdapter extends RecyclerView.Adapter<JogoAdapter.JogoViewHolder
             } else {
                 placarPath = jogoAtual.getPlacar().getConcatenado();
             }
-            holder.dataHora.setText(dataHoraPath);
+            holder.dataHora.setText(dataHoraPath.toUpperCase());
             holder.placar.setText(placarPath);
             Picasso.get().load(logoMandantePath).fit().centerInside().into(holder.logoMandante);
             Picasso.get().load(logoVisitantePath).fit().centerInside().into(holder.logoVisitante);
