@@ -52,6 +52,7 @@ public class JogoAdapter extends RecyclerView.Adapter<JogoAdapter.JogoViewHolder
             }
             holder.dataHora.setText(dataHoraPath.toUpperCase());
             Picasso.get().load(logoMandantePath).fit().centerInside().into(holder.logoMandante);
+            Picasso.get().setLoggingEnabled(true);
             Picasso.get().load(logoVisitantePath).fit().centerInside().into(holder.logoVisitante);
         }
 
