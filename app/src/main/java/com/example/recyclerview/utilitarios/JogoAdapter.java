@@ -16,6 +16,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import static android.media.CamcorderProfile.get;
+
 public class JogoAdapter extends RecyclerView.Adapter<JogoAdapter.JogoViewHolder> {
 
         private Context jogosContext;
@@ -38,25 +40,44 @@ public class JogoAdapter extends RecyclerView.Adapter<JogoAdapter.JogoViewHolder
         @Override
         public void onBindViewHolder(@NonNull JogoViewHolder holder, int position) {
             Jogo jogoAtual = jogoArrayList.get(position);
-            String logoMandantePath = jogoAtual.getMandante().getUrlDaImagem();
-            String logoVisitantePath = jogoAtual.getVisitante().getUrlDaImagem();
-            int golsMandantePath;
-            int golsVisitantePath;
-            String dataHoraPath = jogoAtual.getData() + " " + jogoAtual.getLocal() + " " +
-                    jogoAtual.getHora();
-            if (jogoAtual.getPlacar() != null) {
-                golsMandantePath = jogoAtual.getPlacar().getGolsDoMandante();
-                golsVisitantePath = jogoAtual.getPlacar().getGetGolsDoVisitante();
-                holder.golsMandante.setText(String.valueOf(golsMandantePath));
-                holder.golsVisitante.setText(String.valueOf(golsVisitantePath));
-            }
-            holder.dataHora.setText(dataHoraPath.toUpperCase());
-            Picasso.get().load(logoMandantePath).fit().centerInside().into(holder.logoMandante);
-            Picasso.get().setLoggingEnabled(true);
-            Picasso.get().load(logoVisitantePath).fit().centerInside().into(holder.logoVisitante);
+            adaptaImagens(holder, jogoAtual);
+            adaptaDataHoraLocal(holder, jogoAtual);
+            adaptaPlacar(holder, jogoAtual);
+            configuraSeparator(holder, position);
         }
 
-        @Override
+    private void configuraSeparator(@NonNull JogoViewHolder holder, int position) {
+        if (position == jogoArrayList.size() -1) {
+            holder.separador.setVisibility(View.GONE);
+        }
+    }
+
+    private void adaptaDataHoraLocal(@NonNull JogoViewHolder holder, Jogo jogoAtual) {
+        String dataHoraPath = jogoAtual.getData() + " " + jogoAtual.getLocal() + " " +
+                jogoAtual.getHora();
+
+        holder.dataHora.setText(dataHoraPath.toUpperCase());
+    }
+
+    private void adaptaImagens(@NonNull JogoViewHolder holder, Jogo jogoAtual) {
+        String logoMandantePath = jogoAtual.getMandante().getUrlDaImagem();
+        String logoVisitantePath = jogoAtual.getVisitante().getUrlDaImagem();
+        Picasso.get().load(logoMandantePath).fit().centerInside().into(holder.logoMandante);
+        Picasso.get().load(logoVisitantePath).fit().centerInside().into(holder.logoVisitante);
+    }
+
+    private void adaptaPlacar(@NonNull JogoViewHolder holder, Jogo jogoAtual) {
+        int golsMandantePath;
+        int golsVisitantePath;
+        if (jogoAtual.getPlacar() != null) {
+            golsMandantePath = jogoAtual.getPlacar().getGolsDoMandante();
+            golsVisitantePath = jogoAtual.getPlacar().getGetGolsDoVisitante();
+            holder.golsMandante.setText(String.valueOf(golsMandantePath));
+            holder.golsVisitante.setText(String.valueOf(golsVisitantePath));
+        }
+    }
+
+    @Override
         public int getItemCount() {
             return jogoArrayList.size();
         }
@@ -68,14 +89,19 @@ public class JogoAdapter extends RecyclerView.Adapter<JogoAdapter.JogoViewHolder
             public TextView dataHora;
             public TextView golsMandante;
             public TextView golsVisitante;
+            public View separador;
             public JogoViewHolder(@NonNull View itemView) {
                 super(itemView);
+                vinculaVariaveis(itemView);
+            }
 
+            private void vinculaVariaveis(@NonNull View itemView) {
                 logoMandante = itemView.findViewById(R.id.logoMandante);
                 logoVisitante = itemView.findViewById(R.id.logoVisitante);
                 dataHora = itemView.findViewById(R.id.dataHora);
                 golsMandante = itemView.findViewById(R.id.golsMandante);
                 golsVisitante = itemView.findViewById(R.id.golsVisitante);
+                separador = itemView.findViewById(R.id.separador);
             }
         }
     }
