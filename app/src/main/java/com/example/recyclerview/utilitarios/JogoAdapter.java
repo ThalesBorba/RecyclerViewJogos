@@ -55,7 +55,6 @@ public class JogoAdapter extends RecyclerView.Adapter<JogoAdapter.JogoViewHolder
     private void adaptaDataHoraLocal(@NonNull JogoViewHolder holder, Jogo jogoAtual) {
         String dataHoraPath = jogoAtual.getData() + " " + jogoAtual.getLocal() + " " +
                 jogoAtual.getHora();
-
         holder.dataHora.setText(dataHoraPath.toUpperCase());
     }
 

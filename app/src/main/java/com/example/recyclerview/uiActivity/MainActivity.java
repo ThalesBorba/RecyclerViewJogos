@@ -34,13 +34,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recyclerview);
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(RetrofitCall.urlBase)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        RetrofitCall chamada = retrofit.create(RetrofitCall.class);
-        Call<JogoResponse> requestDeJogos = chamada.getJogos();
+        Call<JogoResponse> requestDeJogos = getJogoResponseCall();
         RecyclerView jogosRecyclerView = findViewById(R.id.lista_notas_recyclerview);
 
 
@@ -53,11 +47,8 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
 
-                JogoResponse jogoResponse = response.body();
-                ArrayList<Jogo> jogos = jogoResponse.getJogos();
-                JogoAdapter jogosAdapter = new
-                        JogoAdapter(MainActivity.this, jogos);
-                jogosRecyclerView.setAdapter(jogosAdapter);
+                ArrayList<Jogo> jogos = getJogoArrayList(response);
+                criaAdapter(jogos, jogosRecyclerView);
 
             }
 
@@ -66,5 +57,26 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void criaAdapter(ArrayList<Jogo> jogos, RecyclerView jogosRecyclerView) {
+        JogoAdapter jogosAdapter = new
+                JogoAdapter(MainActivity.this, jogos);
+        jogosRecyclerView.setAdapter(jogosAdapter);
+    }
+
+    private ArrayList<Jogo> getJogoArrayList(Response<JogoResponse> response) {
+        JogoResponse jogoResponse = response.body();
+        return jogoResponse.getJogos();
+    }
+
+    private Call<JogoResponse> getJogoResponseCall() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(RetrofitCall.urlBase)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        RetrofitCall chamada = retrofit.create(RetrofitCall.class);
+        return chamada.getJogos();
     }
 }
