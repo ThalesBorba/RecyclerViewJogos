@@ -11,15 +11,12 @@ public class Time {
     public int getId() {
         return id;
     }
-
     public String getNome() {
         return nome;
     }
-
     public String getUrlDaImagem() {
         return urlDaImagem;
     }
-
     @Override
     public String toString() {
         return (String) urlDaImagem;
