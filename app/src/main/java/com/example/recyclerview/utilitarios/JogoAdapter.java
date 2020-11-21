@@ -20,12 +20,12 @@ import static android.media.CamcorderProfile.get;
 
 public class JogoAdapter extends RecyclerView.Adapter<JogoAdapter.JogoViewHolder> {
 
-        private Context jogosContext;
-        private ArrayList<Jogo> jogoArrayList;
+        private final Context jogosContext;
+        private final ArrayList<Jogo> jogoArrayList;
 
-        public JogoAdapter(Context context, ArrayList<Jogo> movieArrayList) {
+        public JogoAdapter(Context context, ArrayList<Jogo> listaDeJogos) {
             jogosContext = context;
-            jogoArrayList = movieArrayList;
+            jogoArrayList = listaDeJogos;
         }
 
         @NonNull
@@ -81,7 +81,7 @@ public class JogoAdapter extends RecyclerView.Adapter<JogoAdapter.JogoViewHolder
             return jogoArrayList.size();
         }
 
-        public class JogoViewHolder extends RecyclerView.ViewHolder {
+        public static class JogoViewHolder extends RecyclerView.ViewHolder {
 
             public ImageView logoMandante;
             public ImageView logoVisitante;

@@ -21,6 +21,4 @@
         tools:listitem="@layout/activity_cardview">
     </androidx.recyclerview.widget.RecyclerView>
 
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

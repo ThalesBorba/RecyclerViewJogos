@@ -6,9 +6,7 @@ public class Jogo {
     private Placar placar;
     private Time mandante, visitante;
 
-    public int getId() {
-        return id;
-    }
+    public int getId() { return id; }
     public String getData() {
         return data;
     }

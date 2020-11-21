@@ -1,12 +1,9 @@
 package com.example.recyclerview.uiActivity;
 
 import android.os.Bundle;
-import android.text.style.DrawableMarginSpan;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.recyclerview.R;
@@ -23,21 +20,20 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static java.security.AccessController.getContext;
-
 public class MainActivity extends AppCompatActivity {
-
-    private JogoAdapter jogosAdapter;
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recyclerview);
 
-        Call<JogoResponse> requestDeJogos = getJogoResponseCall();
         RecyclerView jogosRecyclerView = findViewById(R.id.lista_notas_recyclerview);
+        Call<JogoResponse> requestDeJogos = jogosRecebidosDoServidor();
+        aplicaRespostaAoView(jogosRecyclerView, requestDeJogos);
 
+    }
 
+    private void aplicaRespostaAoView(RecyclerView jogosRecyclerView, Call<JogoResponse> requestDeJogos) {
         requestDeJogos.enqueue(new Callback<JogoResponse>() {
             @Override
             public void onResponse(Call<JogoResponse> call, Response<JogoResponse> response) {
@@ -70,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         return jogoResponse.getJogos();
     }
 
-    private Call<JogoResponse> getJogoResponseCall() {
+    private Call<JogoResponse> jogosRecebidosDoServidor() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(RetrofitCall.urlBase)
                 .addConverterFactory(GsonConverterFactory.create())
