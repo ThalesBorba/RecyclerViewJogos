@@ -1,5 +1,5 @@
 # RecyclerViewJogos
-Tabela de uma rodada de jogos.
+Aplicativo android simulando uma tabela de uma rodada de jogos.
 
 Retrofit + Gson para leitura de api.
 
